@@ -1,0 +1,15 @@
+`include "discipline.h"
+`include "constants.h"
+
+module nmos_va(drain, gate, source);
+    inout drain, gate, source;
+    electrical drain, gate, source;
+
+    parameter real Vth = 0.7;        // Threshold voltage
+    parameter real K = 50e-6;        // Gain factor (?A/V?)
+
+    analog begin
+        I(drain, source) <+ (V(gate, source) > Vth) ?
+            0.5 * K * (V(gate, source) - Vth)**2 : 0;
+    end
+endmodule
