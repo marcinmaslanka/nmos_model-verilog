@@ -1,15 +1,22 @@
+// Declare a simple Verilog-A model for an NMOS transistor in saturation only
 `include "discipline.h"
-`include "constants.h"
 
-module nmos_va(drain, gate, source);
-    inout drain, gate, source;
-    electrical drain, gate, source;
+module nmos_simple (
+    input  electrical gate,      // Gate terminal of the NMOS
+    input  electrical source,    // Source terminal of the NMOS
+    output electrical drain      // Drain terminal of the NMOS
+);
 
-    parameter real Vth = 0.7;        // Threshold voltage
-    parameter real K = 50e-6;        // Gain factor (?A/V?)
+    // Parameters: Transconductance gain and threshold voltage
+    parameter real K   = 1e-3;   // Process-dependent transconductance parameter (A/V²)
+    parameter real Vth = 0.7;    // Threshold voltage in volts
 
     analog begin
+        // Implement saturation current equation:
+        // If Vgs > Vth, use quadratic model: Id = 0.5 * K * (Vgs - Vth)^2
+        // Otherwise, current is zero
         I(drain, source) <+ (V(gate, source) > Vth) ?
             0.5 * K * (V(gate, source) - Vth)**2 : 0;
     end
+
 endmodule
