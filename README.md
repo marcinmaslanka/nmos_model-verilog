@@ -53,6 +53,11 @@ endmodule
   Connect it with other components.
   Save the schematic.
 
+  
+![nmos](https://github.com/user-attachments/assets/12e0874e-9d06-49ca-ae23-8ee06ae9d632)
+
+  
+
 ## 🧪 5. Run Simulation in ADE
 
   Open ADE (Assembler/Explorer).
@@ -60,6 +65,8 @@ endmodule
   Configure simulation type (e.g. tran, dc, ac).
   Choose outputs to plot (e.g. node voltages).
   Click Run.
+
+![nmos](https://github.com/user-attachments/assets/40f6b3e4-0a29-4c82-83e1-fd89662d88b6)
 
 
 ---
